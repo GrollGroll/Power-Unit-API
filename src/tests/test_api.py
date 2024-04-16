@@ -10,6 +10,9 @@ class MockPowerSupply:
     def connect(self):
         print('successfully connected')
 
+    def disconnect(self):
+        print('successfully disconnected')
+
     def get_telemetry(self, channel):
         return {'channel': channel, 'voltage': 5, 'current': 56}
 
@@ -27,6 +30,8 @@ class MockPowerSupply:
 def mock_power_supply(monkeypatch):
     monkeypatch.setattr('src.power_supply.PowerSupply.connect',
                         MockPowerSupply().connect)
+    monkeypatch.setattr('src.power_supply.PowerSupply.disconnect',
+                        MockPowerSupply().disconnect)
     monkeypatch.setattr('src.power_supply.PowerSupply.get_telemetry',
                         MockPowerSupply().get_telemetry)
     monkeypatch.setattr('src.power_supply.PowerSupply.get_current_state',
@@ -42,6 +47,11 @@ def test_connect_socket(mock_power_supply):
     assert response.status_code == 200
 
 
+def test_disconnect_socket(mock_power_supply):
+    response = client.get(app.url_path_for('disconnect_socket'))
+    assert response.status_code == 200
+
+
 def test_read_telemetry(mock_power_supply):
     channel = 1
     response = client.get(f'/telemetry/{channel}')
@@ -49,7 +59,7 @@ def test_read_telemetry(mock_power_supply):
 
 
 def test_read_current_state(mock_power_supply):
-    response = client.get('/current_state/')
+    response = client.get('/current_state')
     assert response.status_code == 200
 
 

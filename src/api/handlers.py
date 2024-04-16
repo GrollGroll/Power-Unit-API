@@ -10,6 +10,11 @@ async def connect_socket():
     power_supply.connect()
 
 
+@router.get('/disconnect')
+async def disconnect_socket():
+    power_supply.disconnect()
+
+
 @router.get('/telemetry/{channel}')
 async def read_telemetry(channel: int):
     if channel > 4:
@@ -20,12 +25,12 @@ async def read_telemetry(channel: int):
     return telemetry
 
 
-@router.get('/current_state/')
+@router.get('/current_state')
 async def read_current_state():
     return power_supply.get_current_state()
 
 
-@router.post('/channel/on/')
+@router.post('/channel/on')
 async def channel_on(channel: int, voltage: float, current: float):
     if channel > 4:
         raise HTTPException(status_code=400, detail='Select channel from 1 to 4')
