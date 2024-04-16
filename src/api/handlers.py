@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException
 
 from ..power_supply import power_supply
 
-
 router = APIRouter()
 
 
