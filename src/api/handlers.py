@@ -12,6 +12,8 @@ async def connect_socket():
 
 @router.get('/telemetry/{channel}')
 async def read_telemetry(channel: int):
+    if channel > 4:
+        raise HTTPException(status_code=400, detail='Select channel from 1 to 4')
     telemetry = power_supply.get_telemetry(channel)
     if not telemetry:
         raise HTTPException(status_code=404, detail='Channel not found')
