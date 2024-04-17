@@ -3,12 +3,12 @@ import os
 
 import pytest
 
-from src.power_supply import PowerSupply
+from power_supply import PowerSupply
 
 
 @pytest.fixture
 def mocked_power_supply(mocker):
-    power_supply = PowerSupply('127.0.0.1', 1026)
+    power_supply = PowerSupply('169.254.129.17', 1026)
 
     mocker.patch.object(power_supply, '_send_command')
     mocker.patch.object(power_supply, '_receive_response', return_value=12)

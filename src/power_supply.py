@@ -1,8 +1,8 @@
 import json
 import socket
 
-from .core.config import app_settings
-from .core.loggers import logger_console, logger_file
+from core.config import app_settings
+from core.loggers import logger_console, logger_file
 
 
 class PowerSupply:
@@ -34,7 +34,7 @@ class PowerSupply:
         channel_parameters['parameters'] = parameters
         return channel_parameters
 
-    def log_telemetry(self, channel: int):
+    def log_telemetry(self, channel: int) -> None:
         telemetry = self.get_telemetry(channel)
         logger_file.info(telemetry)
 

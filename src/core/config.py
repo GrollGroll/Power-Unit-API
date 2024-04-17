@@ -9,7 +9,7 @@ class AppSettings(BaseSettings):
     socket_port: int
 
     class Config:
-        env_file = '../../.env'
+        env_file = '.env'
 
 
 app_settings = AppSettings()
