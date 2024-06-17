@@ -1,4 +1,6 @@
-# 1440 Test Task
+# Power Unit API
+
+API для общения с блоком питания по протоколу WebSocket. 
 
 Запуск API:
 
