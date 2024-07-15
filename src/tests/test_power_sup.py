@@ -34,11 +34,7 @@ def test_log_telemetry(mocked_power_supply):
 def test_get_current_state(mocked_power_supply):
     json_data = mocked_power_supply.get_current_state()
     assert type(json_data) is str
-
-    try:
-        json_data = json.loads(json_data)
-    except json.JSONDecodeError:
-        pass
+    json_data = json.loads(json_data)
 
 
 def test_channel_on(mocked_power_supply):
